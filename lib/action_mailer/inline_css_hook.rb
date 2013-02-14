@@ -9,7 +9,13 @@ module ActionMailer
         host = ActionMailerInlineCss.base_url || message.header[:host].to_s
 
         # Generate an email with all CSS inlined (access CSS a FS path), and URIs
-        premailer = ::Premailer.new(html_part.body.to_s, :with_html_string => true, :base_url => host)
+        premailer = ::Premailer.new(html_part.body.to_s,
+          with_html_string: true,
+          base_url: host,
+          preserve_styles: true,
+          include_link_tags: true,
+          include_style_tags: false
+        )
 
         msg_charset = message.charset
 
